@@ -5,12 +5,12 @@ env:
   SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
   SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
 # Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-   workflow_dispatch:
 #on:
-  #schedule:
-     #- cron: '0 3 * * *'  # Runs every day at 3am
+  # Triggers the workflow on push or pull request events but only for the main branch
+   #workflow_dispatch:
+on:
+  schedule:
+     - cron: '0 3 * * *'  # Runs every day at 3am
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
