@@ -13,7 +13,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(levelname)s
 # Set the time zone
 timezone = pytz.timezone('America/Phoenix')
 
-# Get the current time in IST
+# Get the current time
 current_time = datetime.now(timezone)
 
 # Format the timestamp
@@ -44,13 +44,6 @@ def snowpark_basic_auth() -> Session:
 def get_daily_nhl_standings_data():
     api_url = f'https://api-web.nhle.com/v1/standings/{yesterday_string}'
     
-    # Parameters for the API request
-    #params = {
-    #    'api-key': api_key,
-    #    'format': 'json',
-    #    'limit': limit
-    #}
-
     # Headers for the API request
     headers = {
         'accept': 'application/json'
@@ -76,7 +69,7 @@ def get_daily_nhl_standings_data():
 
             logging.info(f'File Written to local disk with name: {file_name}')
             
-            stg_location = '@dev_db_us.stage_sch.raw_stg/standings/'+yesterday_string+'/'
+            stg_location = '@dev_db_us.stage_sch.raw_standings_stg/standings/'+yesterday_string+'/'
             sf_session = snowpark_basic_auth()
             
             logging.info(f'Placing the file, the file name is {file_name} and stage location is {stg_location}')
@@ -108,9 +101,4 @@ def get_daily_nhl_standings_data():
     #if comes to this line.. it will return nothing
     return None
 
-# Replace 'YOUR_API_KEY' with your actual API key
-#api_key = '<add-app-api-key>'
-
-
-#limit_value = 4000
-air_quality_data = get_daily_nhl_standings_data()
+nhl_standings_data = get_daily_nhl_standings_data()
